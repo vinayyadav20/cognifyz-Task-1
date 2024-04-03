@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Task2</title>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+            box-sizing: border-box;
+            outline: 0;
+            transition: all 0.5s ease;
+        }
+
+        body {
+            font-family: sans-serif;
+        }
+
+        .clicker1,
+        .clicker {
+            color: rgb(255, 255, 255);
+            background-color: rgb(0, 0, 0);
+            padding: 10px;
+            margin: 5px;
+            border-radius: 10px;
+            width: 400px;
+            height: 100px;
+        }
+
+        .calculator {
+            display: flex;
+            flex-direction: column;
+            margin: 1rem 8rem;
+        }
+
+        .clicker2 {
+            color: rgb(255, 255, 255);
+            background-color: rgb(243, 93, 0);
+            padding: 10px;
+            margin: 5px;
+            border-radius: 10px;
+            width: 400px;
+            height: 100px;
+        }
+
+        a {
+            text-decoration: none;
+            color: #fff;
+        }
+
+
+
+        .container {
+            height: 100vh;
+            width: 100vw;
+            display: grid;
+            place-items: center;
+        }
+
+        .calculator {
+            position: relative;
+            height: auto;
+            width: auto;
+            padding: 20px;
+            border-radius: 10px;
+        }
+
+        .theme-toggler {
+            position: absolute;
+            top: 30px;
+            right: 30px;
+            color: #fff;
+            cursor: pointer;
+            z-index: 1;
+        }
+
+        .theme-toggler.active {
+            color: #333;
+        }
+
+        .theme-toggler.active::before {
+            background-color: #fff;
+        }
+
+        .theme-toggler::before {
+            content: '';
+            height: 30px;
+            width: 30px;
+            position: absolute;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            border-radius: 50%;
+            background-color: #333;
+            z-index: -1;
+        }
+
+        #display {
+            margin: 0 10px;
+            height: 150px;
+            width: auto;
+            max-width: 270px;
+            display: flex;
+            align-items: flex-end;
+            justify-content: flex-end;
+            font-size: 30px;
+            margin-bottom: 20px;
+            overflow-x: scroll;
+        }
+
+        #display::-webkit-scrollbar {
+            display: block;
+            height: 3px;
+        }
+
+        button {
+            height: 60px;
+            width: 60px;
+            border: 0;
+            border-radius: 3px;
+            margin: 5px;
+            font-size: 20px;
+            cursor: pointer;
+            transition: all 200ms ease;
+        }
+
+        button:hover {
+            transform: scale(1.1);
+        }
+
+        button#equal {
+            height: 130px;
+        }
+
+        /* light theme */
+
+        .calculator {
+            background-color: blue;
+        }
+
+        .calculator #display {
+            color: #0a1e23;
+        }
+
+        .calculator button#clear {
+            background-color: red;
+            color: black;
+        }
+
+        .calculator button.btn-number {
+            background-color: red;
+            color: #000000;
+        }
+
+        .calculator button.btn-operator {
+            background-color: red;
+            color: #000000;
+        }
+
+        .calculator button.btn-equal {
+            background-color: red;
+            color: #000;
+        }
+
+        /* dark theme */
+
+        .calculator.dark {
+            background-color: blue;
+        }
+
+        .calculator.dark #display {
+            color: #f8fafb;
+        }
+
+        .calculator.dark button#clear {
+            background-color: red;
+            color: #bd3740;
+        }
+
+        .calculator.dark button.btn-number {
+            background-color: red;
+            color: #f8fafb;
+        }
+
+        .calculator.dark button.btn-operator {
+            background-color: red;
+            color: #b10606;
+        }
+
+        .calculator.dark button.btn-equal {
+            background-color: red;
+            color: #ffffff;
+        }
+
+        .click-here-button {
+            padding-left: 50%;
+            border-radius: 10%;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Task2</h1>
+    <center>
+        <p>The button for color changing</p>
+        <button class="clicker1">
+            Click me
+        </button>
+    </center>
+    <center>
+        <p>The button for alert with current time</p>
+        <button class="clicker2">
+            Alert me
+        </button>
+    </center>
+
+    <div class="container">
+        <div class="calculator dark">
+            <div class="theme-toggler active">
+                <i class="toggler-icon"></i>
+            </div>
+            <div class="display-screen">
+                <div id="display"></div>
+            </div>
+
+            <div class="buttons">
+                <table>
+                    <tr>
+                        <td><button class="btn-operator" id="clear">C</button></td>
+                        <td><button class="btn-operator" id="/">&divide;</button></td>
+                        <td><button class="btn-operator" id="*">&times;</button></td>
+                        <td><button class="btn-operator" id="backspace">
+                                << /button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><button class="btn-number" id="7">7</button></td>
+                        <td><button class="btn-number" id="8">8</button></td>
+                        <td><button class="btn-number" id="9">9</button></td>
+                        <td><button class="btn-operator" id="-">-</button></td>
+                    </tr>
+                    <tr>
+                        <td><button class="btn-number" id="4">4</button></td>
+                        <td><button class="btn-number" id="5">5</button></td>
+                        <td><button class="btn-number" id="6">6</button></td>
+                        <td><button class="btn-operator" id="+">+</button></td>
+                    </tr>
+                    <tr>
+                        <td><button class="btn-number" id="1">1</button></td>
+                        <td><button class="btn-number" id="2">2</button></td>
+                        <td><button class="btn-number" id="3">3</button></td>
+                        <td rowspan="2"><button class="btn-equal" id="equal">=</button></td>
+                    </tr>
+                    <tr>
+                        <td><button class="btn-operator" id="(">(</button></td>
+                        <td><button class="btn-number" id="0">0</button></td>
+                        <td><button class="btn-operator" id=")">)</button></td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+    <script>
+        const display = document.querySelector("#display");
+        const buttons = document.querySelectorAll("button");
+
+        buttons.forEach((item) => {
+            item.onclick = () => {
+                if (item.id == "clear") {
+                    display.innerText = "";
+                } else if (item.id == "backspace") {
+                    let string = display.innerText.toString();
+                    display.innerText = string.substr(0, string.length - 1);
+                } else if (display.innerText != "" && item.id == "equal") {
+                    display.innerText = eval(display.innerText);
+                } else if (display.innerText == "" && item.id == "equal") {
+                    display.innerText = "Empty!";
+                    setTimeout(() => (display.innerText = ""), 2000);
+                } else {
+                    display.innerText += item.id;
+                }
+            };
+        });
+
+        const themeToggleBtn = document.querySelector(".theme-toggler");
+        const calculator = document.querySelector(".calculator");
+        const toggleIcon = document.querySelector(".toggler-icon");
+        let isDark = true;
+        themeToggleBtn.onclick = () => {
+            calculator.classList.toggle("dark");
+            themeToggleBtn.classList.toggle("active");
+            isDark = !isDark;
+        };
+
+
+
+        const clicker1 = document.querySelector(".clicker1");
+        const clicker2 = document.querySelector(".clicker2")
+        const clicker = document.querySelector(".clicker")
+        const form = document.querySelector(".calculator")
+        const result_value = document.querySelector(".Result")
+        function getRandomInt(max) {
+            return Math.floor(Math.random() * max);
+        }
+
+        clicker1.addEventListener('click', () => {
+            let colors = `rgb(${getRandomInt(255)},${getRandomInt(255)},${getRandomInt(255)})`
+            clicker1.style.backgroundColor = `${colors}`;
+
+
+        })
+        clicker2.addEventListener('click', () => {
+            alert(`Congrat!\n you are live at ${Date()}`)
+        })
+        form.addEventListener('submit', (event) => {
+            event.preventDefault();
+            let num1 = Number(form[0].value);
+            let num2 = Number(form[1].value);
+            let sum = num1 + num2;
+            console.log(sum)
+            result_value.append(sum)
+        })
+
+
+    </script>
+</body>
+
+</html>
